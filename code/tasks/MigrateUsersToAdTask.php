@@ -50,7 +50,7 @@
 
 
 			        	}else{
-				        	$result = ldap_search($ldapconn,$ldaptree, "mail=".$member->Email, array("mail","objectGUID")) or die ("Error in search query: ".ldap_error($ldapconn));
+				        	$result = ldap_search($ldapconn,$ldaptree, "uiowaADNotificationAddress=".$member->Email, array("uiowaADNotificationAddress","objectGUID")) or die ("Error in search query: ".ldap_error($ldapconn));
 				        	$data = ldap_get_entries($ldapconn, $result);
 
 				        	if($data["count"] == 1){
