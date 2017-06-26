@@ -19,6 +19,7 @@ Member:
     'silverstripeRoles' : 'silverstripeRoles'
     
 Security:
+  logout_url: 'Security/SamlLogout'
   extensions:
     - SAMLSecurityExtension
     

@@ -6,6 +6,9 @@
  */
 class SAMLSecurityExtension extends Extension
 {
+    private static $allowed_actions = array(
+        'SamlLogout'
+    );
     /**
      * Will redirect the user directly to the IdP login endpoint if:
      *
@@ -54,5 +57,16 @@ class SAMLSecurityExtension extends Extension
 
         $authenticator = Injector::inst()->create('SAMLAuthenticator');
         $authenticator->authenticate(["BackURL" => $backURL]);
+    }
+
+    public function SamlLogout(){
+        $member = Member::currentUser();
+        if($member) $member->logOut();
+        if(Director::isLive()){
+            $this->owner->redirect('https://idp.uiowa.edu/idp/profile/Logout');
+        }else{
+           $this->owner->redirect('https://idp-test.uiowa.edu/idp/profile/Logout'); 
+        }
+        
     }
 }
