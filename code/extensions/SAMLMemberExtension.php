@@ -37,6 +37,8 @@ class SAMLMemberExtension extends DataExtension
     {
         $fields->replaceField('GUID', new ReadonlyField('GUID'));
         $fields->removeFieldFromTab('Root', 'SAMLSessionIndex');
+        $fields->removeFieldFromTab('Root', 'silverstripeRoles');
+        $fields->removeFieldFromTab('Root', 'Username');
     }
 
     public function memberLoggedOut(){
