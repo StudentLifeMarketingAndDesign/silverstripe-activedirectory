@@ -4,6 +4,7 @@
     "type": "silverstripe-module",
     "keywords": ["silverstripe", "ad", "active", "directory", "ldap", "sso", "saml"],
     "license": "BSD-3-Clause",
+    "minimum-stability": "stable",
     "authors": [
         {
             "name": "Sean Harvey",
