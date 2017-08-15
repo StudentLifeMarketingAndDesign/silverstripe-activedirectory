@@ -9,6 +9,7 @@ class LDAPMemberSyncTask extends BuildTask
     private static $dependencies = [
         'ldapService' => '%$LDAPService'
     ];
+    protected $enabled = false;
 
     /**
      * Setting this to true causes the sync to delete any local Member

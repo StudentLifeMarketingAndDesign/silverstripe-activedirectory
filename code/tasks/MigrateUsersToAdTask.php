@@ -38,7 +38,8 @@
 			        echo "LDAP bind successful...<br /><br />";
 			        
 
-			        $members = Member::get();
+            $members = Member::get()->where(
+                sprintf('"GUID" IS NULL'));
 
 			        foreach($members as $member){
 

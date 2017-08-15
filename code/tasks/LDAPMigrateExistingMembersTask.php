@@ -11,6 +11,8 @@ class LDAPMigrateExistingMembersTask extends BuildTask
         'ldapService' => '%$LDAPService'
     ];
 
+    protected $enabled = false;
+
     public function run($request)
     {
         $users = $this->ldapService->getUsers(['objectguid', 'mail']);
