@@ -42,7 +42,7 @@
 
 		}
 
-		private function lookupUser($email){
+		public function lookupUser($email){
 			set_time_limit(30);
 
 			$ldapserver = 'iowa.uiowa.edu';
