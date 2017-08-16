@@ -10,6 +10,7 @@ class LDAPGroupSyncTask extends BuildTask
         'ldapService' => '%$LDAPService'
     ];
 
+    protected $enabled = false;
     /**
      * Setting this to true causes the sync to delete any local Group
      * records that were previously imported, but no longer existing in LDAP.
