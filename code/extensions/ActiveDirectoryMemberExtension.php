@@ -6,16 +6,16 @@
 			'silverstripeRoles' => 'Text'
 		);
 
+		private static $required_fields = array(
+
+		);
 
 		public function onBeforeWrite(){
-
 			$silverstripeRoles = $this->owner->obj('silverstripeRoles')->getValue();
 			$adminGroup = Group::get()->filter(array('Title' => 'Administrators'))->First();
 			$contentEditorsGroup = Group::get()->filter(array('Title' => 'Content Authors'))->First();
 			$guid = $this->owner->GUID;
 			$email = $this->owner->obj('Email')->getValue();
-
-
 
 			//If SilverStripeRoles comes through the federated request:
 			if($silverstripeRoles){
@@ -38,13 +38,10 @@
 					$this->owner->GUID = $userLookup['guid'];
 				}
 			}
-
-
 		}
 
-		public function lookupUser($email){
+		private function lookupUser($email){
 			set_time_limit(30);
-
 			$ldapserver = 'iowa.uiowa.edu';
 			$ldapuser      =  AD_SERVICEID_USER;  
 			$ldappass     = AD_SERVICEID_PASS;
@@ -59,23 +56,17 @@
 			    $ldapbind = ldap_bind($ldapconn, $ldapuser, $ldappass) or die ("Error trying to bind: ".ldap_error($ldapconn));
 			    // verify binding
 			    if ($ldapbind) {
-
 			    	//do stuff
-						$result = ldap_search($ldapconn,$ldaptree, "mail=".$email, array("mail","sn", "givenName", "objectGUID", "memberOf")) or die ("Error in search query: ".ldap_error($ldapconn));
+						$result = ldap_search($ldapconn,$ldaptree, "uiowaADNotificationAddress=".$email, array("uiowaADNotificationAddress=","sn", "givenName", "objectGUID", "memberOf")) or die ("Error in search query: ".ldap_error($ldapconn));
 						
 			        	$data = ldap_get_entries($ldapconn, $result);
-			        	//print_r($data[0]);
 			        	if($data["count"] == 1){
 			        		$memberGuid = $this->GUIDtoStr($data[0]["objectguid"][0]);
 			        		$resultArray['guid'] = $memberGuid;
 			        		$resultArray['firstName'] = $data[0]["givenname"][0];
 			        		$resultArray['lastName'] = $data[0]["sn"][0];
-			        		// echo "<p>Found a GUID (".$memberGuid.") matching the email <strong>".$member->Email."</strong>, adding it to the local member's GUID field.</p>";
-			        		//print_r($resultArray);
 			        		return $resultArray;
-			        		// echo "<p><strong>Done.</strong></p>";
 			        	}
-
 
 			    } else {
 			        echo "LDAP bind failed...";
