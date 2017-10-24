@@ -68,6 +68,8 @@ class SAMLMemberExtension extends DataExtension
         $fields->removeFieldFromTab('Root', 'silverstripeRoles');
         $fields->removeFieldFromTab('Root', 'Username');
         $fields->removeFieldFromTab('Root', 'FailedLoginCount');
+
+        $this->owner->extend('updateCMSFieldsAfterSaml', $fields);
     }
 
     public function memberLoggedOut(){
