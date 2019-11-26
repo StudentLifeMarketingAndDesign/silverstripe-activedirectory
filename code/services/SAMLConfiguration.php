@@ -1,4 +1,6 @@
 <?php
+
+use OneLogin\Saml2\Constants;
 /**
  * Class SAMLConfiguration
  *
@@ -61,9 +63,9 @@ class SAMLConfiguration extends Object
         $conf['sp']['entityId'] = $sp['entityId'];
         $conf['sp']['assertionConsumerService'] = [
             'url' => Director::absoluteBaseURL() . 'saml/acs',
-            'binding' => OneLogin_Saml2_Constants::BINDING_HTTP_POST
+            'binding' => Constants::BINDING_HTTP_POST
         ];
-        $conf['sp']['NameIDFormat'] = isset($sp['nameIdFormat']) ? $sp['nameIdFormat'] : OneLogin_Saml2_Constants::NAMEID_TRANSIENT;
+        $conf['sp']['NameIDFormat'] = isset($sp['nameIdFormat']) ? $sp['nameIdFormat'] : Constants::NAMEID_TRANSIENT;
         $conf['sp']['x509cert'] = file_get_contents($spCertPath);
         $conf['sp']['privateKey'] = file_get_contents($spKeyPath);
 
@@ -72,12 +74,12 @@ class SAMLConfiguration extends Object
         $conf['idp']['entityId'] = $idp['entityId'];
         $conf['idp']['singleSignOnService'] = [
             'url' => $idp['singleSignOnService'],
-            'binding' => OneLogin_Saml2_Constants::BINDING_HTTP_REDIRECT,
+            'binding' => Constants::BINDING_HTTP_REDIRECT,
         ];
         if (isset($idp['singleLogoutService'])) {
             $conf['idp']['singleLogoutService'] = [
                 'url' => $idp['singleLogoutService'],
-                'binding' => OneLogin_Saml2_Constants::BINDING_HTTP_REDIRECT,
+                'binding' => Constants::BINDING_HTTP_REDIRECT,
             ];
         }
 

@@ -1,4 +1,5 @@
 <?php
+use OneLogin\Saml2\Auth;
 /**
  * Class SAMLHelper
  *
@@ -25,6 +26,6 @@ class SAMLHelper extends Object
     public function getSAMLauth()
     {
         $samlConfig = $this->SAMLConfService->asArray();
-        return new \OneLogin_Saml2_Auth($samlConfig);
+        return new Auth($samlConfig);
     }
 }
