@@ -12,7 +12,7 @@ use OneLogin\Saml2\Constants;
  *
  * https://syncplicity.zendesk.com/hc/en-us/articles/202392814-Single-sign-on-with-ADFS
  */
-class SAMLConfiguration extends Object
+class SAMLConfiguration extends SS_Object
 {
     /**
      * @var bool
